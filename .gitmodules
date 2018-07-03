@@ -1,0 +1,3 @@
+[submodule "AVR-APA102-library"]
+	path = libs/AVR-APA102-library
+	url = https://github.com/Rave-Saber/AVR-APA102-library.git
