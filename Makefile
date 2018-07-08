@@ -1,16 +1,13 @@
-# Run at 8Mhz
-F_CPU = 8000000UL
-
-
-# Lumenati 8-LED Strip
-#LED_COUNT = 8
-
-# Dotstar 144/m Strip
 #LED_COUNT = 60
-#LED_COUNT = 80
-LED_COUNT = 100
+LED_COUNT = 72
+#LED_COUNT = 110
 #LED_COUNT = 144
 
+# Shift the LED we start at
+STARTING_LED = 73
+
+# Run at 8Mhz
+F_CPU = 8000000UL
 
 # ATmegaXX8a DIP
 MCU = atmega168
@@ -46,6 +43,9 @@ CPPFLAGS += -DMOSI=$(MOSI) -DMOSI_DDR=$(MOSI_DDR) -DMOSI_PORT=$(MOSI_PORT)
 CPPFLAGS += -DSS=$(SS) -DSS_DDR=$(SS_DDR) -DSS_PORT=$(SS_PORT)
 CPPFLAGS += -DSCK=$(SCK) -DSCK_DDR=$(SCK_DDR)
 CPPFLAGS += -DLED_COUNT=$(LED_COUNT)
+ifdef STARTING_LED
+CPPFLAGS += -DSTARTING_LED=$(STARTING_LED)
+endif
 
 CFLAGS  = -Os -g -std=gnu99 -Wall
 CFLAGS += -funsigned-char -funsigned-bitfields -fpack-struct -fshort-enums
