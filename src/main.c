@@ -221,7 +221,7 @@ int main(void) {
         while (last_hold_count < POWER_ON_COUNT) {}
         last_hold_count = 0;
         powered_on = true;
-        extend_current_sequence(EXTEND_RETRACT_DELAY);
+        extend_pattern(PATTERNS + current_pattern, EXTEND_RETRACT_DELAY);
         while (powered_on) {
             if (last_hold_count > POWER_OFF_COUNT) {
                 last_hold_count = 0;
@@ -236,7 +236,7 @@ int main(void) {
                 _delay_ms(50);
             }
         }
-        retract_current_sequence(EXTEND_RETRACT_DELAY);
+        retract_pattern(PATTERNS + current_pattern, EXTEND_RETRACT_DELAY);
         apa102_set_all_leds(rgb(0x000000));
     }
     return 0;
