@@ -39,17 +39,17 @@ static const RGBColor_t RB_ORANGE = { 0xff, 0x20, 0x00 };
 
 // Some color sequences
 static const RGBColor_t RGB_SEQUENCE[] = { RED, GREEN, BLUE };
-#define RGB_SEQUENCE_LENGTH (ARR_SIZE(RGB_SEQUENCE))
+static const uint8_t RGB_SEQUENCE_LENGTH = (ARR_SIZE(RGB_SEQUENCE));
 
 static const RGBColor_t RAINBOW_SEQUENCE[] = {
     RED, RB_ORANGE, RB_YELLOW, GREEN, BLUE, RB_INDIGO, RB_VIOLET
 };
-#define RAINBOW_SEQUENCE_LENGTH (ARR_SIZE(RAINBOW_SEQUENCE))
+static const uint8_t RAINBOW_SEQUENCE_LENGTH = (ARR_SIZE(RAINBOW_SEQUENCE));
 
 static const RGBColor_t TEST_SEQUENCE[] = {
     MAGENTA, LIME_GREEN, MAGENTA, CYAN, ORANGE, ORANGE
 };
-#define TEST_SEQUENCE_LENGTH (ARR_SIZE(TEST_SEQUENCE))
+static const uint8_t TEST_SEQUENCE_LENGTH = (ARR_SIZE(TEST_SEQUENCE));
 
 
 /* Pattern Choices */
@@ -107,7 +107,7 @@ static const GenericPattern_t PATTERNS[] = {
     SOLID_PATTERN(YELLOW),
     SCROLL_PATTERN(SCROLL_RGB),
 };
-#define PATTERN_COUNT (ARR_SIZE(PATTERNS))
+static const uint8_t PATTERN_COUNT = (ARR_SIZE(PATTERNS));
 
 static uint8_t current_pattern = 0;
 
