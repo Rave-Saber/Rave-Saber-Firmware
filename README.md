@@ -1,5 +1,7 @@
 # RaveSaber - AVR Firmware
 
+[![Build Status](https://travis-ci.org/Rave-Saber/Rave-Saber-Firmware.svg?branch=master)](https://travis-ci.org/Rave-Saber/Rave-Saber-Firmware)
+
 Firmware for AVR microcontrollers that drives a Dotstar LED strip in the
 RaveSaber lightsaber.
 
