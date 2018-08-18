@@ -6,8 +6,8 @@ LED_COUNT = 72
 # Shift the LED we start at
 STARTING_LED = 73
 
-# Run at 8Mhz
-F_CPU = 8000000UL
+# Run at 16Mhz
+F_CPU = 16000000UL
 
 # ATmegaXX8a DIP
 MCU = atmega168
@@ -19,6 +19,8 @@ SS_DDR = DDRB
 SS_PORT = PORTB
 SCK = PB5
 SCK_DDR = DDRB
+EXT_CRYSTAL_LFUSE = 0xF7
+DEFAULT_LFUSE = 0x62
 
 
 PROGRAMMER = usbtiny
@@ -67,12 +69,18 @@ $(TARGET).elf: $(OBJECTS)
 	 $(OBJCOPY) -j .text -j .data -O ihex $< $@
 
 
-.PHONY: all flash clean
+.PHONY: all flash set_fuses reset_fuses clean
 
 all: $(TARGET).hex
 
 flash: $(TARGET).hex
 	$(AVRDUDE) -c $(PROGRAMMER) -p $(MCU) -U flash:w:$<
+
+set_fuses:
+	$(AVRDUDE) -c $(PROGRAMMER) -p $(MCU) -U lfuse:w:$(EXT_CRYSTAL_LFUSE):m
+
+reset_fuses:
+	$(AVRDUDE) -c $(PROGRAMMER) -p $(MCU) -U lfuse:w:$(DEFAULT_LFUSE):m
 
 clean:
 	rm -f *.hex *.elf *.map

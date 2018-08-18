@@ -124,9 +124,10 @@ static volatile uint16_t last_hold_count = 0;
 
 /* Check the button status when Timer 0 reaches the CTC mode TOP.
  *
- * With a clock of 8Mhz/1024 & a TOP of 8, this interrupt is called every ~1ms:
+ * With a clock of 16Mhz/1024 & a TOP of 16, this interrupt is called every
+ * ~1ms:
  *
- *      8 / ( 8000000 / 1024 ) = 0.001024
+ *      16 / ( 16000000 / 1024 ) = 0.001024
  *
  * When the timer reaches TOP, we sample the button input & compare it to
  * previous runs. When pushing the button down, the timer checks for 4
@@ -181,9 +182,9 @@ static inline void init_button(void) {
     DDRD &= ~(1 << PD2);
     PORTD |= 1 << PD2;
 
-    // Set to CTC mode with TOP of 8
+    // Set to CTC mode with TOP of 16
     TCCR0A |= 1 << WGM01;
-    OCR0A = 8;
+    OCR0A = 16;
     // Call interrupt on compare match
     TIMSK0 |= 1 << OCIE0A;
     sei();

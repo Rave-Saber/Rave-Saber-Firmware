@@ -18,6 +18,13 @@ chip. By default, we use the USBtinyISP programmer along with the last 72 of
 the 144 available LEDs, but you can change this by modifying the variables in
 the `Makefile`.
 
+The firmware assumes you are using a 16Mhz crystal oscillator. If you are
+running a different clock frequency, change `F_CPU` in the `Makefile`. You can
+enable the external oscillator fuses by running `make set_fuses` and set them
+back to the defualt with `make reset_fuses`. You will need to change the fuse
+definitions in the Makefile if you are using something other than an
+ATmega168a.
+
 Once your microcontroller is hooked up to the rest of [the hardware][hardware],
 you can long-press the button to toggle power & short-press the button to cycle
 colors.
@@ -26,8 +33,12 @@ colors.
 ## TODO
 
 * Setup, Usage, & API docs.
-* Use avr power saving modes(when off or single step pattern) w/ button press
-  wake-ups.
+* Power saving
+    * Take measurements of LED & MCU current draws to establish baseline.
+    * Use avr power saving modes(when off or single step pattern) w/ button
+      press wake-ups(only stay woken up if we pass a button threshold).
+    * Use timers for delays so we can sleep during steps?
+    * Disable unused peripherals.
 * Save/Load Patterns to/from EEPROM or SD Card.
 * Bluetooth module + desktop or tablet app to control saber & modify patterns
   interactively.
