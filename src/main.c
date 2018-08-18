@@ -215,7 +215,6 @@ int main(void) {
     apa102_init_spi();
     apa102_set_all_leds(rgb(0x000000));
     initialize_pattern(PATTERNS);
-    update_sequence(PATTERNS);
 
     bool powered_on = false;
     while (1) {
