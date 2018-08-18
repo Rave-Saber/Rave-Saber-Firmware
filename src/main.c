@@ -53,6 +53,17 @@ static const uint8_t TEST_SEQUENCE_LENGTH = (ARR_SIZE(TEST_SEQUENCE));
 
 
 /* Pattern Choices */
+#define SIMPLE_SOLID(c1) static const SolidArgs_t SOLID_ ## c1 = \
+    { .color = c1, .delay = 0 }
+SIMPLE_SOLID(RED);
+SIMPLE_SOLID(BLUE);
+SIMPLE_SOLID(GREEN);
+SIMPLE_SOLID(MAGENTA);
+SIMPLE_SOLID(CYAN);
+SIMPLE_SOLID(ORANGE);
+SIMPLE_SOLID(LIME_GREEN);
+SIMPLE_SOLID(VIOLET);
+SIMPLE_SOLID(YELLOW);
 static const FlashArgs_t FLASH_RGB = {
     .sequence = RGB_SEQUENCE, .length = RGB_SEQUENCE_LENGTH,
     .color_delay = 70, .blank_delay = 20
@@ -90,21 +101,21 @@ static const WideScrollArgs_t WIDE_SCROLL_RAINBOW = {
 
 // Selectable Patterns
 static const GenericPattern_t PATTERNS[] = {
-    SOLID_PATTERN(RED),
-    SOLID_PATTERN(GREEN),
-    SOLID_PATTERN(BLUE),
+    SOLID_PATTERN(SOLID_RED),
+    SOLID_PATTERN(SOLID_GREEN),
+    SOLID_PATTERN(SOLID_BLUE),
     FLASH_PATTERN(FLASH_RGB),
     WIDE_SCROLL_PATTERN(WIDE_SCROLL_RGB),
-    SOLID_PATTERN(MAGENTA),
-    SOLID_PATTERN(CYAN),
-    SOLID_PATTERN(ORANGE),
+    SOLID_PATTERN(SOLID_MAGENTA),
+    SOLID_PATTERN(SOLID_CYAN),
+    SOLID_PATTERN(SOLID_ORANGE),
     FLASH_PATTERN(FLASH_TEST),
     RIBBON_PATTERN(RIBBON_RGB),
     SCROLL_PATTERN(SCROLL_RAINBOW),
     WIDE_SCROLL_PATTERN(WIDE_SCROLL_RAINBOW),
-    SOLID_PATTERN(LIME_GREEN),
-    SOLID_PATTERN(VIOLET),
-    SOLID_PATTERN(YELLOW),
+    SOLID_PATTERN(SOLID_LIME_GREEN),
+    SOLID_PATTERN(SOLID_VIOLET),
+    SOLID_PATTERN(SOLID_YELLOW),
     SCROLL_PATTERN(SCROLL_RGB),
 };
 static const uint8_t PATTERN_COUNT = (ARR_SIZE(PATTERNS));
@@ -229,7 +240,7 @@ int main(void) {
             } else if (last_hold_count > SWITCH_PATTERN_COUNT) {
                 last_hold_count = 0;
                 next_pattern();
-            } else if (total_pattern_steps > 1) {
+            } else if (total_pattern_steps > 1 || playing_pattern_series) {
                 run_pattern_step();
             } else {
                 // Single step patterns don't require step updates
