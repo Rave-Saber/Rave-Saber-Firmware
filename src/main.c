@@ -3,6 +3,7 @@
 #include <avr/power.h>
 #include <util/delay.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <stdbool.h>
 #include <apa102.h>
 #include <apa102_patterns.h>
@@ -97,6 +98,80 @@ static const WideScrollArgs_t WIDE_SCROLL_RAINBOW = {
 };
 
 
+// Custom
+// Static Wide Bands
+typedef struct WideBandArgs {
+    const RGBColor_t *sequence;
+    uint8_t length;
+    uint16_t delay;
+} WideBandArgs_t;
+uint8_t bands_step_count(void *custom_data) {
+    return 1;
+}
+uint16_t bands_set_sequence(RGBColor_t *current_sequence, void *custom_data) {
+    WideBandArgs_t *args = (WideBandArgs_t *) custom_data;
+    div_t band_count_width = div(LED_COUNT, args->length);
+    uint8_t short_band_width = band_count_width.quot;
+    uint8_t long_bands = band_count_width.rem;
+    for (uint8_t band = 0; band < args->length; band++) {
+        uint8_t band_start;
+        uint8_t width;
+        if (band < long_bands) {
+            band_start = band * (short_band_width + 1);
+            width = short_band_width + 1;
+        } else {
+            band_start = (short_band_width + 1) * long_bands
+                + short_band_width * (band - long_bands);
+            width = short_band_width;
+        }
+        for (uint8_t band_led = 0; band_led < width; band_led++) {
+            uint8_t led_offset = (band_start + band_led);
+            *(current_sequence + led_offset) = *(args->sequence + band);
+        }
+    }
+    return args->delay;
+}
+static const WideBandArgs_t rainbow_bands_args = {
+    .sequence = RAINBOW_SEQUENCE,
+    .length = RAINBOW_SEQUENCE_LENGTH,
+    .delay = 250
+};
+static const CustomPatternArgs_t RAINBOW_BANDS = {
+    .step_count_function = bands_step_count,
+    .set_sequence_function = bands_set_sequence,
+    .custom_data = (WideBandArgs_t *) &rainbow_bands_args
+};
+
+// Flash Wide Band - SERIES = {WideBand,Solid(Blank)}
+typedef struct FlashBandArgs {
+    const CustomPatternArgs_t *wide_band_args;
+    uint16_t blank_delay;
+} FlashBandArgs_t;
+uint8_t flash_band_series_steps(void *series_data) {
+    return 2;
+}
+GenericPattern_t flash_band_get_pattern(void *series_data) {
+    FlashBandArgs_t *args = (FlashBandArgs_t *) series_data;
+    static SolidArgs_t blank_args = { .color = {0x00, 0x00, 0x00} };
+    blank_args.delay = args->blank_delay;
+    if (current_series_step == 0) {
+        GenericPattern_t p = { .pattern_type = CUSTOM, .pattern_type_args = args->wide_band_args };
+        return p;
+    } else {
+        GenericPattern_t p = SOLID_PATTERN(blank_args);
+        return p;
+    }
+}
+static const FlashBandArgs_t rainbow_flash_band_args = {
+    .wide_band_args = &RAINBOW_BANDS, .blank_delay = 30
+};
+static const SeriesArgs_t RAINBOW_FLASH_BANDS = {
+    .total_series_steps_function = flash_band_series_steps,
+    .get_pattern_for_step = flash_band_get_pattern,
+    .series_data = (void *) &rainbow_flash_band_args,
+};
+
+
 // Selectable Patterns
 static const GenericPattern_t PATTERNS[] = {
     SOLID_PATTERN(SOLID_RED),
@@ -114,7 +189,9 @@ static const GenericPattern_t PATTERNS[] = {
     SOLID_PATTERN(SOLID_LIME_GREEN),
     SOLID_PATTERN(SOLID_VIOLET),
     SOLID_PATTERN(SOLID_YELLOW),
+    CUSTOM_PATTERN(RAINBOW_BANDS),
     SCROLL_PATTERN(SCROLL_RGB),
+    SERIES_PATTERN(RAINBOW_FLASH_BANDS),
 };
 static const uint8_t PATTERN_COUNT = (ARR_SIZE(PATTERNS));
 
