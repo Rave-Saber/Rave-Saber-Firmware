@@ -1,10 +1,12 @@
-#LED_COUNT = 60
-LED_COUNT = 72
-#LED_COUNT = 110
-#LED_COUNT = 144
+# Use the full strip
+LED_COUNT = 144
 
-# Shift the LED we start at
-STARTING_LED = 73
+# Shift the LED we start at(if not using full strip)
+#STARTING_LED = 73
+
+# Max limit per strip = (3A regulator - 500mA MCU) / 2 strips
+# A lower setting will make your batteries last longer
+CURRENT_LIMIT = 1250
 
 # Run at 16Mhz
 F_CPU = 16000000UL
@@ -45,8 +47,16 @@ CPPFLAGS += -DMOSI=$(MOSI) -DMOSI_DDR=$(MOSI_DDR) -DMOSI_PORT=$(MOSI_PORT)
 CPPFLAGS += -DSS=$(SS) -DSS_DDR=$(SS_DDR) -DSS_PORT=$(SS_PORT)
 CPPFLAGS += -DSCK=$(SCK) -DSCK_DDR=$(SCK_DDR)
 CPPFLAGS += -DLED_COUNT=$(LED_COUNT)
+
 ifdef STARTING_LED
 CPPFLAGS += -DSTARTING_LED=$(STARTING_LED)
+endif
+
+ifdef CURRENT_LIMIT
+CURRENT_PER_LED = $$(( $(CURRENT_LIMIT) / $(LED_COUNT) ))
+ifeq ($(shell test $(CURRENT_PER_LED) -lt 60; echo $$?), 0)
+CPPFLAGS += -DCURRENT_PER_LED=$(CURRENT_PER_LED)UL
+endif
 endif
 
 CFLAGS  = -Os -g -std=gnu99 -Wall

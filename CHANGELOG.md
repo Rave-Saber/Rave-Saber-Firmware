@@ -2,6 +2,10 @@
 
 ## master
 
+* Use all 144 LEDs in a strip with a maximum current draw of 1.25A.
+* Add custom WideBand & FlashBand patterns with rainbow color sequences.
+* Modify code for use with 16Mhz CPU clock speeds. Add make commands to
+  set/reset fuses for external crystals.
 * For current-draw purposes, reduce the number of lit LEDs & shift them to the
   end of the strip. This makes it easier to test out patterns by swinging the
   strip around while it's attached to a breadboard.
