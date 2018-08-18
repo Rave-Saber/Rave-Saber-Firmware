@@ -24,25 +24,23 @@
 static const RGBColor_t RED = { 0xff, 0x00, 0x00 };
 static const RGBColor_t GREEN = { 0x00, 0xff, 0x00 };
 static const RGBColor_t BLUE = { 0x00, 0x00, 0xff };
-//static const RGBColor_t MAGENTA = { 0xff, 0x00, 0x2c };   // current draw is too high
-static const RGBColor_t MAGENTA = { 0x88, 0x00, 0x6b };
+static const RGBColor_t MAGENTA = { 0xeb, 0x00, 0x20 };
 static const RGBColor_t CYAN = { 0x00, 0x79, 0x38 };
 static const RGBColor_t YELLOW = { 0xe6, 0xe1, 0x00 };
-static const RGBColor_t ORANGE = { 0xff, 0x1b, 0x00 };
+static const RGBColor_t ORANGE = { 0xff, 0x25, 0x00 };
 static const RGBColor_t LIME_GREEN = { 0x2d, 0x6b, 0x01 };
 static const RGBColor_t VIOLET = { 0x3d, 0x00, 0xff };
 // Specific colors for the rainbow sequence
-static const RGBColor_t RB_VIOLET = { 0x95, 0x00, 0xff };
-static const RGBColor_t RB_INDIGO = { 0x37, 0x00, 0xeb };
+static const RGBColor_t RB_VIOLET = { 0xeb, 0x00, 0xff };
+static const RGBColor_t RB_INDIGO = { 0x4b, 0x00, 0x9b };
 static const RGBColor_t RB_YELLOW = { 0xff, 0xff, 0x00 };
-static const RGBColor_t RB_ORANGE = { 0xff, 0x20, 0x00 };
 
 // Some color sequences
 static const RGBColor_t RGB_SEQUENCE[] = { RED, GREEN, BLUE };
 static const uint8_t RGB_SEQUENCE_LENGTH = (ARR_SIZE(RGB_SEQUENCE));
 
 static const RGBColor_t RAINBOW_SEQUENCE[] = {
-    RED, RB_ORANGE, RB_YELLOW, GREEN, BLUE, RB_INDIGO, RB_VIOLET
+    RED, ORANGE, RB_YELLOW, GREEN, BLUE, RB_INDIGO, RB_VIOLET
 };
 static const uint8_t RAINBOW_SEQUENCE_LENGTH = (ARR_SIZE(RAINBOW_SEQUENCE));
 
