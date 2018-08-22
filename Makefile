@@ -59,7 +59,7 @@ CPPFLAGS += -DCURRENT_PER_LED=$(CURRENT_PER_LED)UL
 endif
 endif
 
-CFLAGS  = -Os -g -std=gnu99 -Wall
+CFLAGS  = -Os -g -std=c11 -Wall -Wextra -pedantic
 CFLAGS += -funsigned-char -funsigned-bitfields -fpack-struct -fshort-enums
 CFLAGS += -ffunction-sections -fdata-sections
 
