@@ -105,6 +105,7 @@ typedef struct WideBandArgs {
     uint16_t delay;
 } WideBandArgs_t;
 uint8_t bands_step_count(void *custom_data) {
+    (void) custom_data;
     return 1;
 }
 uint16_t bands_set_sequence(RGBColor_t *current_sequence, void *custom_data) {
@@ -147,6 +148,7 @@ typedef struct FlashBandArgs {
     uint16_t blank_delay;
 } FlashBandArgs_t;
 uint8_t flash_band_series_steps(void *series_data) {
+    (void) series_data;
     return 2;
 }
 GenericPattern_t flash_band_get_pattern(void *series_data) {
