@@ -33,7 +33,6 @@ static const RGBColor_t LIME_GREEN = { 0x2d, 0x6b, 0x01 };
 static const RGBColor_t VIOLET = { 0x3d, 0x00, 0xff };
 // Specific colors for the rainbow sequence
 static const RGBColor_t RB_VIOLET = { 0xeb, 0x00, 0xff };
-static const RGBColor_t RB_INDIGO = { 0x4b, 0x00, 0x9b };
 static const RGBColor_t RB_YELLOW = { 0xff, 0xff, 0x00 };
 
 // Some color sequences
@@ -41,7 +40,7 @@ static const RGBColor_t RGB_SEQUENCE[] = { RED, GREEN, BLUE };
 static const uint8_t RGB_SEQUENCE_LENGTH = (ARR_SIZE(RGB_SEQUENCE));
 
 static const RGBColor_t RAINBOW_SEQUENCE[] = {
-    RED, ORANGE, RB_YELLOW, GREEN, BLUE, RB_INDIGO, RB_VIOLET
+    RED, ORANGE, RB_YELLOW, GREEN, BLUE, RB_VIOLET
 };
 static const uint8_t RAINBOW_SEQUENCE_LENGTH = (ARR_SIZE(RAINBOW_SEQUENCE));
 
