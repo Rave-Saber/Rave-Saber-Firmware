@@ -14,20 +14,19 @@ in our [APA102 Library][avr-apa102-lib].
 
 Connect your programmer to your ATmega168a chip and run `make flash`. If you
 want to change or re-order the colors, modify `src/main.c` and re-flash your
-chip. By default, we use the USBtinyISP programmer along with the last 72 of
-the 144 available LEDs, but you can change this by modifying the variables in
-the `Makefile`.
+chip. We use the USBtinyISP programmer along with all 144 LEDs, but you can
+change this by modifying the variables in the `Makefile`.
 
 The firmware assumes you are using a 16Mhz crystal oscillator. If you are
 running a different clock frequency, change `F_CPU` in the `Makefile`. You can
 enable the external oscillator fuses by running `make set_fuses` and set them
-back to the defualt with `make reset_fuses`. You will need to change the fuse
-definitions in the Makefile if you are using something other than an
-ATmega168a.
+back to the default with `make reset_fuses`. You may need to change the fuse
+definitions in the `Makefile` if you want to use those commands with different
+ATmega chips.
 
 Once your microcontroller is hooked up to the rest of [the hardware][hardware],
 you can long-press the button to toggle power & short-press the button to cycle
-colors.
+patterns.
 
 
 ## TODO
