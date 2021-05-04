@@ -2,13 +2,20 @@
 
 ## master
 
+
+## v2.0.0
+
+Patterns! Support for rendering things other than single colors has been added,
+with the ability to define your own custom patterns. Since the hardware for
+this release is now on battery power, we've added some powersaving
+optimizations as well.
+
+* ROYGBIV color sequences are now ROYGBV, since indigo was too similar to
+  violet.
 * Use all 144 LEDs in a strip with a maximum current draw of 1.25A.
 * Add custom WideBand & FlashBand patterns with rainbow color sequences.
 * Modify code for use with 16Mhz CPU clock speeds. Add make commands to
   set/reset fuses for external crystals.
-* For current-draw purposes, reduce the number of lit LEDs & shift them to the
-  end of the strip. This makes it easier to test out patterns by swinging the
-  strip around while it's attached to a breadboard.
 * Replace the colors array with a variety of patterns and color sequences.
 * Switch from the simple effects apa102 library module to the patterns module.
   This allows extension/retraction with any pattern type so we can support all
