@@ -8,8 +8,8 @@ LED_COUNT = 144
 # A lower setting will make your batteries last longer
 CURRENT_LIMIT = 1250
 
-# Run at 16Mhz
-F_CPU = 16000000UL
+# Run at 20Mhz
+F_CPU = 20000000UL
 
 # ATmegaXX8a DIP
 MCU = atmega168

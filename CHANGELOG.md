@@ -2,6 +2,8 @@
 
 ## master
 
+* Bump clock speed to 20Mhz, raise button polling interval from 1ms to 10ms, &
+  drop max button hold time from 67s to 2.5s.
 
 ## v2.0.0
 

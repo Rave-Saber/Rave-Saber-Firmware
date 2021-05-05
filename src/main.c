@@ -15,10 +15,10 @@
 #define EXTEND_RETRACT_DELAY 0
 
 /* Button Press Timings */
-// Each count is ~1ms
-#define POWER_ON_COUNT 250
-#define POWER_OFF_COUNT 750
-#define SWITCH_PATTERN_COUNT 100
+// Each count is ~10ms
+#define POWER_ON_COUNT 25
+#define POWER_OFF_COUNT 75
+#define SWITCH_PATTERN_COUNT 10
 
 // TODO: move colors, sequences, & patterns to a "patterns.h" file
 // Some colors
@@ -207,14 +207,14 @@ static uint8_t current_pattern = 0;
 //      exposing a function for comparing hold down times to it, reseting the
 //      value when returning true. This prevents users from forgetting to set
 //      this to 0 after handling a button press.
-static volatile uint16_t last_hold_count = 0;
+static volatile uint8_t last_hold_count = 0;
 
 /* Check the button status when Timer 0 reaches the CTC mode TOP.
  *
- * With a clock of 16Mhz/1024 & a TOP of 16, this interrupt is called every
- * ~1ms:
+ * With a clock of 20Mhz/1024 & a TOP of 195, this interrupt is called every
+ * ~10ms:
  *
- *      16 / ( 16000000 / 1024 ) = 0.001024
+ *      195 / ( 20000000 / 1024 ) = 0.009984
  *
  * When the timer reaches TOP, we sample the button input & compare it to
  * previous runs. When pushing the button down, the timer checks for 4
@@ -223,8 +223,8 @@ static volatile uint16_t last_hold_count = 0;
  * When the button is released, the pushed-down time is moved into the
  * `last_hold_count` global variable and the tracking state is reset.
  *
- * By storing pushed-down time count in 2 bytes, we can track button presses of
- * up to 67s.
+ * By storing pushed-down time count in 1 bytes, we can track button presses of
+ * up to 2.5s.
  *
  * Any application code that consumes a button press should set
  * `last_hold_count` to `0`.
@@ -232,7 +232,7 @@ static volatile uint16_t last_hold_count = 0;
  * TODO: Also test for 4 samples when deciding the button is released
  */
 ISR(TIMER0_COMPA_vect) {
-    static volatile uint16_t current_hold_count = 0;
+    static volatile uint8_t current_hold_count = 0;
     static volatile bool tracking_press = false;
     static volatile uint8_t sample_count = 0;
 
@@ -269,9 +269,9 @@ static inline void init_button(void) {
     DDRD &= ~(1 << PD2);
     PORTD |= 1 << PD2;
 
-    // Set to CTC mode with TOP of 16
+    // Set to CTC mode with TOP of 195
     TCCR0A |= 1 << WGM01;
-    OCR0A = 16;
+    OCR0A = 195;
     // Call interrupt on compare match
     TIMSK0 |= 1 << OCIE0A;
     sei();
