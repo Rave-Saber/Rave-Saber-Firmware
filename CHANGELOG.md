@@ -2,6 +2,12 @@
 
 ## master
 
+
+## v3.0.0
+
+The primary change for this release was adjusting the clock speed to 20Mhz,
+which matches the crystal oscillator in the hardware's PCB design.
+
 * Adjust pattern delays & add a rainbow ribbon pattern.
 * Bump clock speed to 20Mhz, raise button polling interval from 1ms to 10ms, &
   drop max button hold time from 67s to 2.5s.
