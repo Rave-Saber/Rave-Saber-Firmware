@@ -69,11 +69,15 @@ static const FlashArgs_t FLASH_RGB = {
 
 static const FlashArgs_t FLASH_TEST = {
     .sequence = TEST_SEQUENCE, .length = TEST_SEQUENCE_LENGTH,
-    .color_delay = 55, .blank_delay = 15
+    .color_delay = 75, .blank_delay = 5
 };
 
 static const RibbonArgs_t RIBBON_RGB = {
     .sequence = RGB_SEQUENCE, .length = RGB_SEQUENCE_LENGTH, .delay = 35
+};
+
+static const RibbonArgs_t RIBBON_RAINBOW = {
+    .sequence = RAINBOW_SEQUENCE, .length = RAINBOW_SEQUENCE_LENGTH, .delay = 80
 };
 
 static const ScrollArgs_t SCROLL_RAINBOW = {
@@ -93,7 +97,7 @@ static const WideScrollArgs_t WIDE_SCROLL_RGB = {
 
 static const WideScrollArgs_t WIDE_SCROLL_RAINBOW = {
     .sequence = RAINBOW_SEQUENCE, .length = RAINBOW_SEQUENCE_LENGTH,
-    .delay = 3,
+    .delay = 1,
 };
 
 
@@ -134,7 +138,7 @@ uint16_t bands_set_sequence(RGBColor_t *current_sequence, void *custom_data) {
 static const WideBandArgs_t rainbow_bands_args = {
     .sequence = RAINBOW_SEQUENCE,
     .length = RAINBOW_SEQUENCE_LENGTH,
-    .delay = 250
+    .delay = 25
 };
 static const CustomPatternArgs_t RAINBOW_BANDS = {
     .step_count_function = bands_step_count,
@@ -164,7 +168,7 @@ GenericPattern_t flash_band_get_pattern(void *series_data) {
     }
 }
 static const FlashBandArgs_t rainbow_flash_band_args = {
-    .wide_band_args = &RAINBOW_BANDS, .blank_delay = 30
+    .wide_band_args = &RAINBOW_BANDS, .blank_delay = 5
 };
 static const SeriesArgs_t RAINBOW_FLASH_BANDS = {
     .total_series_steps_function = flash_band_series_steps,
@@ -179,6 +183,7 @@ static const GenericPattern_t PATTERNS[] = {
     SOLID_PATTERN(SOLID_GREEN),
     SOLID_PATTERN(SOLID_BLUE),
     FLASH_PATTERN(FLASH_RGB),
+    RIBBON_PATTERN(RIBBON_RAINBOW),
     WIDE_SCROLL_PATTERN(WIDE_SCROLL_RGB),
     SOLID_PATTERN(SOLID_MAGENTA),
     SOLID_PATTERN(SOLID_CYAN),
