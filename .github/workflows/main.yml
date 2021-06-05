@@ -17,7 +17,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Make Example Code
-        run: |
-          cd example
-          make
+      - name: Build Firmware
+        run: make
