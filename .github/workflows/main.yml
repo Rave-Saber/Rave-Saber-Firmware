@@ -13,7 +13,7 @@ on:
 
 jobs:
   container:
-    container: prikhi/avr-toolchain
+    container: lysergia/avr-toolchain
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
