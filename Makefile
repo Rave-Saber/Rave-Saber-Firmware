@@ -1,12 +1,12 @@
 # Use the full strip
-LED_COUNT = 144
+LED_COUNT = 122
 
 # Shift the LED we start at(if not using full strip)
 #STARTING_LED = 73
 
 # Max limit per strip = (3A regulator - 500mA MCU) / 2 strips
 # A lower setting will make your batteries last longer
-CURRENT_LIMIT = 1250
+CURRENT_LIMIT = 750
 
 # Run at 20Mhz
 F_CPU = 20000000UL
