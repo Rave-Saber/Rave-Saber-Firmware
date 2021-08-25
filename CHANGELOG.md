@@ -2,7 +2,7 @@
 
 ## master
 
-* Drop LED count to 122 to fit a 34" blade.
+* Drop LED count to 121 to fit a 34" blade.
 * Drop current limit to 750mA per LED strip.
 
 

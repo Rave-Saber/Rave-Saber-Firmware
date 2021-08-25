@@ -1,5 +1,5 @@
 # Use the full strip
-LED_COUNT = 122
+LED_COUNT = 121
 
 # Shift the LED we start at(if not using full strip)
 #STARTING_LED = 73
