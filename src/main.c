@@ -82,12 +82,12 @@ static const RibbonArgs_t RIBBON_RAINBOW = {
 
 static const ScrollArgs_t SCROLL_RAINBOW = {
     .sequence = RAINBOW_SEQUENCE, .length = RAINBOW_SEQUENCE_LENGTH,
-    .reverse = false, .delay = 50,
+    .direction = UP, .delay = 50,
 };
 
 static const ScrollArgs_t SCROLL_RGB = {
     .sequence = RGB_SEQUENCE, .length = RGB_SEQUENCE_LENGTH,
-    .reverse = false, .delay = 100,
+    .direction = UP, .delay = 100,
 };
 
 static const WideScrollArgs_t WIDE_SCROLL_RGB = {
@@ -313,7 +313,7 @@ int main(void) {
         while (last_hold_count < POWER_ON_COUNT) {}
         last_hold_count = 0;
         powered_on = true;
-        extend_pattern(PATTERNS + current_pattern, EXTEND_RETRACT_DELAY);
+        extend_pattern(PATTERNS + current_pattern, 3, EXTEND_RETRACT_DELAY);
         while (powered_on) {
             if (last_hold_count > POWER_OFF_COUNT) {
                 last_hold_count = 0;
@@ -328,7 +328,7 @@ int main(void) {
                 _delay_ms(50);
             }
         }
-        retract_pattern(PATTERNS + current_pattern, EXTEND_RETRACT_DELAY);
+        retract_pattern(PATTERNS + current_pattern, 3, EXTEND_RETRACT_DELAY);
         apa102_set_all_leds(rgb(0x000000));
     }
     return 0;
